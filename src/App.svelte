@@ -1,4 +1,10 @@
 <script lang="ts">
+import Table from "./components/Table.svelte";
+import type { SpeedRow } from "./types/SpeedRow";
+
+import { calculateTimePerDistance, convertToFormattedTime, convertToSeconds, getDistanceInMeters, Metric } from "./util/calculators";
+
+
 	const presets = [
 		"1000m",
 		"1 mile",
@@ -10,71 +16,110 @@
 		"Custom",
 	];
 
-	let preset = "Custom"
-	let distance = 0;
-	let modifier = "KM"
-	
+	let preset = "Custom";
+
+	let time = "00:40:00";
+
+	let distance = 10;
+	let modifier: Metric = "km";
+
+	let rows = undefined;
+
 	const setCurrentPreset = (newPreset: string) => {
-		switch(newPreset) {
+		switch (newPreset) {
 			case "1000m":
 				distance = 1000;
-				modifier = "Meters"
+				modifier = "meters";
 				break;
 			case "1 mile":
 				distance = 1650;
-				modifier = "Meters"
+				modifier = "meters";
 				break;
 			case "3k":
 				distance = 3000;
-				modifier = "Meters"
+				modifier = "meters";
 				break;
 			case "5k":
 				distance = 5000;
-				modifier = "Meters"
+				modifier = "meters";
 				break;
 			case "10k":
 				distance = 10000;
-				modifier = "Meters"
+				modifier = "meters";
 				break;
 			case "Half Marathon":
 				distance = 21098;
-				modifier = "Meters"
+				modifier = "meters";
 				break;
 			case "Marathon":
 				distance = 42195;
-				modifier = "Meters"
+				modifier = "meters";
 				break;
 		}
-		preset = newPreset; 
+		preset = newPreset;
+	};
+
+	const calulateValues = () => {
+		const seconds = convertToSeconds(time);
+		const meters = getDistanceInMeters(distance, modifier);
+
+		const secondsPerMeter = seconds / meters;
+
+		const row: SpeedRow = {
+			"400": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 400)),
+			"1000": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 1000)),
+			"5k": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 5000)),
+			"10k": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 10000)),
+			"Half": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 21098)),
+			"Marathon": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 42195)),
+		}
+		rows = [row];
 	}
 </script>
 
+<section class="hero is-primary">
+	<div class="hero-body">
+		<h1 class="title">Running calculator!</h1>
+	</div>
+</section>
+<section class="section">
+	<div class="container">
+		<input class="input" type="time" step="1" bind:value={time}/>
+		<div class="tabs">
+			<ul>
+				{#each presets as currentPreset}
+					<li class={preset === currentPreset && "is-active"}>
+						<a on:click={(_) => setCurrentPreset(currentPreset)}
+							>{currentPreset}</a
+						>
+					</li>
+				{/each}
+			</ul>
+		</div>
+		<label for="" class="label">Distance</label>
+		<div class="inputrow">
+			<input class="input" type="number" bind:value={distance} />
+			<div class="select">
+				<select bind:value={modifier}>
+					<option>km</option>
+					<option>miles</option>
+					<option>meters</option>
+				</select>
+			</div>
+		</div>
+		<button class="button is-primary" on:click={_ => calulateValues()}>Calculate</button>
+	</div>
+</section>
+<section class="section">
+	<h1 class="title">Output</h1>
+	{#if rows !== undefined}
+		<Table rows={rows} />
+	{/if}
+</section>
 
-<h1>Running calculator!</h1>
-<input class="input" type="time" step="1" value="00:00:00">
-<div class="tabs">
-	<ul>
-		{#each presets as currentPreset }
-			<li class={preset === currentPreset && "is-active"}>
-				<a on:click={(_) => setCurrentPreset(currentPreset)}>{currentPreset}</a>
-			</li>
-		{/each}
-	</ul>
-</div>
-<div class="inputrow">
-	<input class="input" type="number" bind:value={distance} />
-    <div class="select">
-        <select bind:value={modifier}>
-            <option>KM</option>
-            <option>Miles</option>
-            <option>Meters</option>
-        </select>
-    </div>
-</div>
-<button class="button is-primary">Calculate</button>
 
 <style>
-    .inputrow {
-        display: flex;
-    }
+	.inputrow {
+		display: flex;
+	}
 </style>
