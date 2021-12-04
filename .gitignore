@@ -1,4 +1,8 @@
 node_modules
+
+# editors
 .vscode
+.idea
+
 .DS_store
 build
