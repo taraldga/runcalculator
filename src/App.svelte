@@ -84,7 +84,7 @@ import { calculateTimePerDistance, convertToFormattedTime, convertToSeconds, get
 </section>
 <section class="section">
 	<div class="container">
-		<input class="input" type="time" step="1" bind:value={time}/>
+		<input class="input" type="text" bind:value={time}/>
 		<div class="tabs">
 			<ul>
 				{#each presets as currentPreset}
