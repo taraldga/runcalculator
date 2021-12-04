@@ -18,7 +18,7 @@ import { calculateTimePerDistance, convertToFormattedTime, convertToSeconds, get
 
 	let preset = "Custom";
 
-	let time = "00:40:00";
+	let time = undefined;
 
 	let distance = 10;
 	let modifier: Metric = "km";
