@@ -3,8 +3,7 @@ export type Metric = "km" | "miles" | "meters"
 
 export const convertToSeconds = (input: string) => {
     const values = input.split(":")
-
-    if(values.length = 3) {
+    if(values.length === 3) {
         // Hour is present
         const hours = Number.parseInt(values[0]);
         const minutes = Number.parseInt(values[1]);  
@@ -14,6 +13,8 @@ export const convertToSeconds = (input: string) => {
         // Only minutes and seconds are present
         const minutes = Number.parseInt(values[0]);  
         const seconds = Number.parseInt(values[1]);
+        console.log(minutes)
+        console.log(seconds)
         return (minutes * 60) + seconds
     }
     
