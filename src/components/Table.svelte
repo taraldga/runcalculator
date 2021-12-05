@@ -17,7 +17,7 @@
 </script>
 
 
-<table class="table">
+<table class="table is-fullwidth">
     <thead>
         <tr>
             <th>Distance</th>
