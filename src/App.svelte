@@ -110,7 +110,7 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 				</select>
 			</div>
 		</div>
-		<button class="button is-primary" on:click={_ => calulateValues()}>Calculate</button>
+		<button class="button is-primary is-fullwidth" on:click={_ => calulateValues()}>Calculate</button>
 	</div>
 </section>
 <section class="section">
