@@ -4,36 +4,36 @@
     
     export let rows: SpeedRow[];
     export let targetDistance: TargetDistance = undefined;
+
+    let targets = [
+        "km/h",
+        "400m",
+        "1k",
+        "5k",
+        "10k",
+        "Half",
+        "Marathon",
+    ]
 </script>
 
 
 <table class="table">
     <thead>
         <tr>
-            <th>400m</th>
-            <th>1k</th>
-            <th>5k</th>
-            {#if targetDistance !== undefined}
-                <th>targetDistance.distanceHeader</th>
-            {/if}
-            <th>10k</th>
-            <th>Half</th>
-            <th>Marathon</th>
+            <th>Distance</th>
+            {#each rows as row}
+                <th>{row["1k"]} min/km</th>
+            {/each}
         </tr>
     </thead>
     <tbody>
-        {#each rows as row }
-            <tr>
-                <td>{row["400"]}</td>
-                <td>{row["1000"]}</td>
-                <td>{row["5k"]}</td>
-                {#if targetDistance !== undefined}
-                    <td>{targetDistance.distanceTime}</td>
-                {/if}
-                <td>{row["10k"]}</td>
-                <td>{row["Half"]}</td>
-                <td>{row["Marathon"]}</td>
-            </tr>
+        {#each targets as target }
+        <tr>
+            <td class="has-text-weight-semibold">{target}</td>
+            {#each rows as row}
+                    <td>{row[target]}</td>
+            {/each}
+        </tr>
         {/each}
     </tbody>
 </table>

@@ -2,8 +2,7 @@
 import Table from "./components/Table.svelte";
 import type { SpeedRow } from "./types/SpeedRow";
 
-import { calculateTimePerDistance, convertToFormattedTime, convertToSeconds, getDistanceInMeters, Metric } from "./util/calculators";
-
+import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertToSeconds, getDistanceInMeters, Metric } from "./util/calculators";
 
 	const presets = [
 		"1000m",
@@ -66,8 +65,9 @@ import { calculateTimePerDistance, convertToFormattedTime, convertToSeconds, get
 		const secondsPerMeter = seconds / meters;
 
 		const row: SpeedRow = {
-			"400": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 400)),
-			"1000": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 1000)),
+			"km/h": (Math.round(calulateKmh(secondsPerMeter*1000)*10)/10).toString(),
+			"400m": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 400)),
+			"1k": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 1000)),
 			"5k": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 5000)),
 			"10k": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 10000)),
 			"Half": convertToFormattedTime(calculateTimePerDistance(secondsPerMeter, 21098)),

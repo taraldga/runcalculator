@@ -42,6 +42,11 @@ export const getDistanceInMeters = (distance: number, convertFrom: Metric) => {
     }
 }
 
+export const calulateKmh = (secondsPerKm: number) => {
+    const secondsInHour = 3600;
+    return secondsInHour / secondsPerKm;
+}
+
 export const calculateTimePerDistance = (secondsPerKm: number, distance: number) => {
     return secondsPerKm * distance;
 }
