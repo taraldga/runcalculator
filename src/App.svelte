@@ -88,16 +88,15 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 <section class="section">
 	<div class="container">
 		<Input bind:value={time} bind:error={error} />
-		<div class="tabs">
-			<ul>
+		<label for="" class="label">Presets</label>
+		<div class="select is-fullwidth">
+			<select on:change={e => setCurrentPreset(e.currentTarget.value)}>
 				{#each presets as currentPreset}
-					<li class={preset === currentPreset && "is-active"}>
-						<a on:click={(_) => setCurrentPreset(currentPreset)}
-							>{currentPreset}</a
-						>
-					</li>
+					<option value={currentPreset}>
+						{currentPreset}
+					</option>
 				{/each}
-			</ul>
+			</select>
 		</div>
 		<label for="" class="label">Distance</label>
 		<div class="inputrow">
