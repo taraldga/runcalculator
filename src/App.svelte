@@ -114,7 +114,6 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 	</div>
 </section>
 <section class="section">
-	<h1 class="title">Output</h1>
 	{#if rows !== undefined}
 		<Table rows={rows} />
 	{/if}
