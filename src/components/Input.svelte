@@ -62,4 +62,7 @@
     .input_row {
         display: flex;
     }
+    .button {
+        touch-action: manipulation;
+    }
 </style>
