@@ -21,14 +21,18 @@
 
         // TODO: Clean up these conditionals
         if( vals.length === 2 && +vals[minuteIndex] > 59) {
+            // If we only had mm:ss and got over 60 min
             vals[minuteIndex] = (Number.parseInt(vals[minuteIndex]) % 60).toString();
             vals.splice(0,0,"01")
         } else if ( vals.length === 3 && +vals[minuteIndex] > 59) {
+            // If we had hh:mm:ss and got over 60 min
             vals[minuteIndex] = (Number.parseInt(vals[minuteIndex]) % 60).toString();
             vals[0] = (Number.parseInt(vals[0]) + 1).toString();
         } else if(vals.length === 2 && +vals[minuteIndex] < 0) {
+            // If we had mm:ss and got below 0 mins, do nothing
             return;
         } else if(+vals[minuteIndex] < 0) {
+            // If we had hh:mm:ss and got below 0 mins
             vals[minuteIndex] = ((Number.parseInt(vals[minuteIndex])+ 60 ) % 60).toString();
             
             if(+vals[0] === 1 ) {
