@@ -11,7 +11,6 @@
     }
 
     const buttonUpdateValue = (incrementor: number) => {
-        console.log("Moomo")
         const vals = value.split(":");
         let minuteIndex = 0;
         if(vals.length === 2) {
@@ -20,15 +19,33 @@
             minuteIndex = 1;
         }
         vals[minuteIndex] = (Number.parseInt(vals[minuteIndex]) + incrementor).toString();
-        value = vals.join(":");
-        console.log("Halla")
+
+        // TODO: Clean up these conditionals
+        if( vals.length === 2 && +vals[minuteIndex] > 59) {
+            vals[minuteIndex] = (Number.parseInt(vals[minuteIndex]) % 60).toString();
+            vals.splice(0,0,"01")
+        } else if ( vals.length === 3 && +vals[minuteIndex] > 59) {
+            vals[minuteIndex] = (Number.parseInt(vals[minuteIndex]) % 60).toString();
+            vals[0] = (Number.parseInt(vals[0]) + 1).toString();
+        } else if(vals.length === 2 && +vals[minuteIndex] < 0) {
+            return;
+        } else if(+vals[minuteIndex] < 0) {
+            vals[minuteIndex] = ((Number.parseInt(vals[minuteIndex])+ 60 ) % 60).toString();
+            
+            if(+vals[0] === 1 ) {
+                vals.splice(0,1);
+            } else {
+                vals[0] = (Number.parseInt(vals[0]) + -1).toString();
+            }
+        }
+        value = vals.map(val => val.padStart(2,"0")).join(":");
     }
 </script>
 
 <label for="" class="label">Time</label>
 <div class="input_row">
-    <button class="button" on:click={() => buttonUpdateValue(-1)}>-10</button>
-    <button class="button" on:click={() => buttonUpdateValue(-10)}>-1</button>
+    <button class="button" on:click={() => buttonUpdateValue(-10)}>-10</button>
+    <button class="button" on:click={() => buttonUpdateValue(-1)}>-1</button>
     <input 
         class={`input ${error !== undefined ? "is-danger": ""}`} 
         bind:value={value} 
