@@ -13,8 +13,6 @@ export const convertToSeconds = (input: string) => {
         // Only minutes and seconds are present
         const minutes = Number.parseInt(values[0]);  
         const seconds = Number.parseInt(values[1]);
-        console.log(minutes)
-        console.log(seconds)
         return (minutes * 60) + seconds
     }
     

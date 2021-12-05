@@ -3,7 +3,6 @@
     export let error = undefined;
 
     const onChange = (newVal: string) => {
-        console.log(halla)
         const vals = newVal.split(":");
         if(vals.length < 2 || vals.length > 3) {
             error = "Please use the format hh:mm:ss"
