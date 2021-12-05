@@ -1,4 +1,6 @@
 <script lang="ts">
+import Input from "./components/Input.svelte";
+
 import Table from "./components/Table.svelte";
 import type { SpeedRow } from "./types/SpeedRow";
 
@@ -18,6 +20,7 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 	let preset = "Custom";
 
 	let time = undefined;
+	let error = undefined;
 
 	let distance = 10;
 	let modifier: Metric = "km";
@@ -84,7 +87,7 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 </section>
 <section class="section">
 	<div class="container">
-		<input class="input" type="text" bind:value={time}/>
+		<Input bind:value={time} bind:error={error} />
 		<div class="tabs">
 			<ul>
 				{#each presets as currentPreset}
