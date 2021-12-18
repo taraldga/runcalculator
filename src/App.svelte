@@ -81,11 +81,9 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 </script>
 
 <section class="hero is-primary">
-	<div class="hero-body">
+	<div class="hero-body is-flex">
 		<h1 class="title">Running calculator!</h1>
 	</div>
-</section>
-<section class="section">
 	<div class="container">
 		<Input bind:value={time} bind:error={error} />
 		<label for="" class="label">Presets</label>
@@ -109,7 +107,7 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 				</select>
 			</div>
 		</div>
-		<button class="button is-primary is-fullwidth" on:click={_ => calulateValues()}>Calculate</button>
+		<button class="button is-link is-fullwidth" on:click={_ => calulateValues()}>Calculate</button>
 	</div>
 </section>
 <section class="section">
@@ -122,5 +120,17 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 <style>
 	.inputrow {
 		display: flex;
+	}
+	.title {
+		margin: 0 auto;
+	}
+	.container {
+		padding: 0 20px;
+	}
+	.hero-body {
+		padding: 20px 0;
+	}
+	:global(body) {
+		padding: 0;
 	}
 </style>
