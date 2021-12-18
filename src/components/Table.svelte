@@ -22,7 +22,7 @@
         <tr>
             <th>Distance</th>
             {#each rows as row}
-                <th>{row["1k"]} min/km</th>
+                <th>Time</th>
             {/each}
         </tr>
     </thead>
