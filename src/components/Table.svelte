@@ -6,13 +6,13 @@
     export let targetDistance: TargetDistance = undefined;
 
     let targets = [
-        "km/h",
         "400m",
         "1k",
         "5k",
         "10k",
         "Half",
         "Marathon",
+        "km/h",
     ]
 </script>
 
