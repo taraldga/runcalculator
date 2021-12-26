@@ -61,7 +61,7 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 		preset = newPreset;
 	};
 
-	const calulateValues = () => {
+	const calculateValues = () => {
 		const seconds = convertToSeconds(time);
 		const meters = getDistanceInMeters(distance, modifier);
 
@@ -107,7 +107,7 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 				</select>
 			</div>
 		</div>
-		<button class="button is-fullwidth" on:click={_ => calulateValues()}>Calculate</button>
+		<button class="button is-fullwidth" on:click={_ => calculateValues()}>Calculate</button>
 	</div>
 </section>
 <section class="section">
