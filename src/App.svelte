@@ -107,7 +107,7 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 				</select>
 			</div>
 		</div>
-		<button class="button is-link is-fullwidth" on:click={_ => calulateValues()}>Calculate</button>
+		<button class="button is-fullwidth" on:click={_ => calulateValues()}>Calculate</button>
 	</div>
 </section>
 <section class="section">
@@ -118,6 +118,9 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 
 
 <style>
+	.label {
+		color: white;
+	}
 	.inputrow {
 		display: flex;
 	}
@@ -132,5 +135,8 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 	}
 	:global(body) {
 		padding: 0;
+	}
+	.hero {
+		background-color: #4B3633;
 	}
 </style>

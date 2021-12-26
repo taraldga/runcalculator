@@ -65,4 +65,7 @@
     .button {
         touch-action: manipulation;
     }
+    .label {
+        color: white;
+    }
 </style>
