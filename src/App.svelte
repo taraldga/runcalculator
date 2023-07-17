@@ -19,7 +19,7 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 
 	let preset = "Custom";
 
-	let time = undefined;
+	let time = "40:00";
 	let error = undefined;
 
 	let distance = 10;
@@ -78,17 +78,18 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 		}
 		rows = [row];
 	}
+	calculateValues();
 </script>
 
 <section class="hero is-primary">
 	<div class="hero-body is-flex">
-		<h1 class="title">Running calculator!</h1>
+		<h1 class="title">Løpekalkulator</h1>
 	</div>
 	<div class="container">
-		<Input bind:value={time} bind:error={error} />
+		<Input bind:value={time} bind:error={error} change={() => calculateValues()} />
 		<label for="" class="label">Presets</label>
 		<div class="select is-fullwidth">
-			<select on:change={e => setCurrentPreset(e.currentTarget.value)}>
+			<select on:change={e => {setCurrentPreset(e.currentTarget.value); calculateValues()}}>
 				{#each presets as currentPreset}
 					<option value={currentPreset}>
 						{currentPreset}
@@ -98,7 +99,7 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 		</div>
 		<label for="" class="label">Distance</label>
 		<div class="inputrow">
-			<input class="input" type="number" bind:value={distance} />
+			<input class="input" type="number" bind:value={distance} on:change={_ => calculateValues()} />
 			<div class="select">
 				<select bind:value={modifier}>
 					<option>km</option>
@@ -107,10 +108,9 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 				</select>
 			</div>
 		</div>
-		<button class="button is-fullwidth" on:click={_ => calculateValues()}>Calculate</button>
 	</div>
 </section>
-<section class="section">
+<section class="container">
 	{#if rows !== undefined}
 		<Table rows={rows} />
 	{/if}
@@ -128,15 +128,15 @@ import { calculateTimePerDistance, calulateKmh, convertToFormattedTime, convertT
 		margin: 0 auto;
 	}
 	.container {
-		padding: 0 20px;
+		padding: 0 10px;
 	}
 	.hero-body {
-		padding: 20px 0;
+		padding: 1% 0;
 	}
 	:global(body) {
 		padding: 0;
 	}
 	.hero {
-		background-color: #4B3633;
+		background-color: #7395AE;
 	}
 </style>
